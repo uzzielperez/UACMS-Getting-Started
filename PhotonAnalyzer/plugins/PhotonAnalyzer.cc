@@ -106,6 +106,9 @@ class PhotonAnalyzer : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
         double eta;
         double phi;
         double E;
+        bool isPassLoose;
+        bool isPassMedium;
+        bool isPassTight;
       };
 
       PhotonInfo_t fPhoton1;
@@ -252,6 +255,13 @@ PhotonAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
    double eta = patPho->eta();
    double phi = patPho->phi();
    double E = patPho->energy();
+   bool isPassLoose  = patPho->photonID("cutBasedPhotonID-Fall17-94X-V2-loose");
+   bool isPassMedium = patPho->photonID("cutBasedPhotonID-Fall17-94X-V2-medium");
+   bool isPassTight  = patPho->photonID("cutBasedPhotonID-Fall17-94X-V2-tight");
+   if (isPassLoose) std::cout << "Cette Photon a passé le Loose Photon ID" << std::endl;
+   else if (isPassMedium) std::cout << "Cette Photon a passé le Medium Photon ID" << std::endl;
+   else if (isPassTight) std::cout << "Cette Photon a passé le Tight Photon ID" << std::endl;
+   else std::cout << "Cett Photon n'a passé aucun des Photon ID catégories " << std::endl;
 
    // Ordering
    //Ordering photons
@@ -260,17 +270,26 @@ PhotonAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
        fPhoton2.eta = fPhoton1.eta;
        fPhoton2.phi = fPhoton1.phi;
        fPhoton2.E = fPhoton1.E;
+       fPhoton2.isPassLoose = fPhoton1.isPassLoose;
+       fPhoton2.isPassMedium = fPhoton1.isPassMedium;
+       fPhoton2.isPassTight = fPhoton1.isPassTight;
 
        fPhoton1.pt = pt;
        fPhoton1.eta = eta;
        fPhoton1.phi = phi;
        fPhoton1.E = E;
+       fPhoton1.isPassLoose = isPassLoose;
+       fPhoton1.isPassMedium = isPassMedium;
+       fPhoton1.isPassTight = isPassTight;
    }
    if ((pt < fPhoton1.pt) && (pt > fPhoton2.pt)){
        fPhoton2.pt = pt;
        fPhoton2.eta = eta;
        fPhoton2.phi = phi;
        fPhoton2.E = E;
+       fPhoton2.isPassLoose = isPassLoose;
+       fPhoton2.isPassMedium = isPassMedium;
+       fPhoton2.isPassTight = isPassTight;
    }
  } // end loop over patPhotons
 

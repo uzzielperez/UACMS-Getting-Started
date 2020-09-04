@@ -14,6 +14,14 @@ process.source = cms.Source("PoolSource",
     )
 )
 
+from RecoEgamma.EgammaTools.EgammaPostRecoTools import setupEgammaPostRecoSeq
+setupEgammaPostRecoSeq(process,
+                       runVID=True,
+                       era='2018-Prompt',
+                       phoIDModules=['RecoEgamma.PhotonIdentification.Identification.mvaPhotonID_Fall17_94X_V2_cff',
+                       'RecoEgamma.PhotonIdentification.Identification.cutBasedPhotonID_Fall17_94X_V2_cff']
+                       )
+
 
 process.TFileService = cms.Service("TFileService",
                 fileName = cms.string("DemoDiPhotonInfo.root")
@@ -25,4 +33,4 @@ process.demo = cms.EDAnalyzer('PhotonAnalyzer',
 )
 
 
-process.p = cms.Path(process.demo)
+process.p = cms.Path(process.demo * process.egammaPostRecoSeq )
