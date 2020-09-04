@@ -3,6 +3,7 @@
 <use name="FWCore/ParameterSet"/>
 <use name="root"/>
 <use name="SimDataFormats/GeneratorProducts"/>
+<use name="DataFormats/PatCandidates"/>
 <use name="GeneratorInterface/Core"/>
 <use name="CommonTools/UtilAlgos"/>
 <flags EDM_PLUGIN="1"/>

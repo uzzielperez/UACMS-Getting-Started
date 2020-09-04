@@ -20,7 +20,8 @@ process.TFileService = cms.Service("TFileService",
                             )
 
 process.demo = cms.EDAnalyzer('PhotonAnalyzer',
-    particles = cms.InputTag("prunedGenParticles")
+    genparticles = cms.InputTag("prunedGenParticles"),
+    photonsMiniAOD = cms.InputTag("slimmedPhotons"),
 )
 
 

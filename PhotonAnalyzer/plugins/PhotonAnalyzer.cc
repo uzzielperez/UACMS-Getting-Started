@@ -35,6 +35,7 @@
 
  // Misc.
 #include "DataFormats/HepMCCandidate/interface/GenParticle.h"
+#include "DataFormats/PatCandidates/interface/Photon.h"
 
 //TFileService
 #include "FWCore/ServiceRegistry/interface/Service.h"
@@ -78,8 +79,10 @@ class PhotonAnalyzer : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
       edm::EDGetTokenT<std::vector<reco::GenParticle> > genParticlesToken_;
       edm::InputTag genParticles_;
       edm::InputTag particles_;
+      edm::EDGetTokenT<edm::View<pat::Photon> >        photonsMiniAODToken_; //photonCollection
 
-      TTree *fgenTree;
+
+      TTree *fTree;
       //Structs
       struct eventInfo_t {
         Long64_t run;
@@ -95,8 +98,20 @@ class PhotonAnalyzer : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
         double E;
       };
 
-      PhotonInfo_t fGenPhoton1;
-      PhotonInfo_t fGenPhoton2;
+      genPhotonInfo_t fGenPhoton1;
+      genPhotonInfo_t fGenPhoton2;
+
+      struct PhotonInfo_t{
+        double pt;
+        double eta;
+        double phi;
+        double E;
+      };
+
+      PhotonInfo_t fPhoton1;
+      PhotonInfo_t fPhoton2;
+
+
 
 };
 
@@ -117,12 +132,15 @@ PhotonAnalyzer::PhotonAnalyzer(const edm::ParameterSet& iConfig)
 
 {
    //now do what ever initialization is needed
-   fgenTree = fs->make<TTree>("fgenTree","GENDiphotonTree");
+   fTree = fs->make<TTree>("fTree","GENDiphotonTree");
 
-   fgenTree->Branch("genPhoton1", &fGenPhoton1, "pt/D:eta:phi:E");
-   fgenTree->Branch("genPhoton2", &fGenPhoton2, "pt/D:eta:phi:E");
+   fTree->Branch("genPhoton1", &fGenPhoton1, "pt/D:eta:phi:E");
+   fTree->Branch("genPhoton2", &fGenPhoton2, "pt/D:eta:phi:E");
+   fTree->Branch("Photon1", &fPhoton1, "pt/D:eta:phi:E");
+   fTree->Branch("Photon2", &fPhoton2, "pt/D:eta:phi:E");
 
-   genParticlesToken_ = consumes<std::vector<reco::GenParticle>>(iConfig.getParameter<edm::InputTag>("genparticles"));
+   genParticlesToken_   = consumes<std::vector<reco::GenParticle>>(iConfig.getParameter<edm::InputTag>("genparticles"));
+   photonsMiniAODToken_ = consumes<edm::View<pat::Photon> >     (iConfig.getParameter<edm::InputTag>("photonsMiniAOD"));
 
 }
 
@@ -161,7 +179,9 @@ PhotonAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     fEventInfo.evnum = -99999.99;
 
     edm::Handle<std::vector<reco::GenParticle> > genParticles;
-    iEvent.getByToken(genParticlesToken_,genParticles);
+    edm::Handle<edm::View<pat::Photon> > photons;
+    iEvent.getByToken(genParticlesToken_,   genParticles);
+    iEvent.getByToken(photonsMiniAODToken_, photons);
 
     fGenPhoton1.pt = -99999.99;
     fGenPhoton1.eta = -99999.99;
@@ -172,6 +192,16 @@ PhotonAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     fGenPhoton2.eta = -99999.99;
     fGenPhoton2.phi = -99999.99;
     fGenPhoton2.E = -99999.99;
+
+    fPhoton1.pt = -99999.99;
+    fPhoton1.eta = -99999.99;
+    fPhoton1.phi = -99999.99;
+    fPhoton1.E = -99999.99;
+
+    fPhoton2.pt = -99999.99;
+    fPhoton2.eta = -99999.99;
+    fPhoton2.phi = -99999.99;
+    fPhoton2.E = -99999.99;
 
     int photoncount = 0;
 
@@ -205,10 +235,53 @@ PhotonAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
      }//end photon end state condition
  }//end loop over gen particles
  cout << "Number of photons in event: " << photoncount << endl;
+
+ // Store patPhotons in a vector (for practice)
+ std::vector<edm::Ptr<pat::Photon>> patPhotons;
+ for (size_t i = 0; i < photons->size(); i++){
+   const auto pho = photons->ptrAt(i);
+   patPhotons.push_back(pho);
+ }
+
+ // Loop over the patPhotons (an example on how to iterate over the elements of a vector)
+ const pat::Photon *patPho;
+ for (std::vector<int>::size_type j = 0; j != patPhotons.size(); j++)
+ {
+   patPho = &(*patPhotons.at(j));
+   double pt = patPho->pt();
+   double eta = patPho->eta();
+   double phi = patPho->phi();
+   double E = patPho->energy();
+
+   // Ordering
+   //Ordering photons
+   if (pt > fPhoton1.pt){
+       fPhoton2.pt = fPhoton1.pt;
+       fPhoton2.eta = fPhoton1.eta;
+       fPhoton2.phi = fPhoton1.phi;
+       fPhoton2.E = fPhoton1.E;
+
+       fPhoton1.pt = pt;
+       fPhoton1.eta = eta;
+       fPhoton1.phi = phi;
+       fPhoton1.E = E;
+   }
+   if ((pt < fPhoton1.pt) && (pt > fPhoton2.pt)){
+       fPhoton2.pt = pt;
+       fPhoton2.eta = eta;
+       fPhoton2.phi = phi;
+       fPhoton2.E = E;
+   }
+ } // end loop over patPhotons
+
+ /* Alternative way of looping over the photonCollection
+ * for (edm::View<pat::Photon>::const_iterator iPho = photons->begin(); iPho != photons->end(); ++iPho) {
+ *    double E = iPho->energy(); }
+ */
  //Apply cuts offline
 
  //Fill the tree Branches
-  fgenTree->Fill();
+  fTree->Fill();
 
 
 
