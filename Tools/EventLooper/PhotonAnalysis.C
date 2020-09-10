@@ -33,11 +33,31 @@ void PhotonAnalysis::Loop()
 
    Long64_t nentries = fChain->GetEntriesFast();
 
+   // Define Counters
+   int loosePho1 = 0;
+
+   // Define Histograms
+   TH1D* genPho1Pt = new TH1D("genPho1Pt", "", 20, 0, 100);
+   TH1D* patPho1Pt = new TH1D("patPho1Pt", "", 20, 0, 100);
+   TH1D* patPho1PtLoose = new TH1D("patPho1PtLoose", "", 20, 0, 100);
+
+   genPho1Pt->Sumw2();
+   patPho1Pt->Sumw2();
+
    Long64_t nbytes = 0, nb = 0;
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
       Long64_t ientry = LoadTree(jentry);
       if (ientry < 0) break;
       nb = fChain->GetEntry(jentry);   nbytes += nb;
       // if (Cut(ientry) < 0) continue;
+
+      genPho1Pt->Fill(genPhoton1_pt);
+      patPho1Pt->Fill(Photon1_pt);
+
+      // Selections
+      
+
+
+
    }
 }

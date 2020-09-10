@@ -22,6 +22,8 @@ setupEgammaPostRecoSeq(process,
                        'RecoEgamma.PhotonIdentification.Identification.cutBasedPhotonID_Fall17_94X_V2_cff']
                        )
 
+globalTag = '102X_upgrade2018_realistic_v12'
+process.GlobalTag.globaltag = globalTag
 
 process.TFileService = cms.Service("TFileService",
                 fileName = cms.string("DemoDiPhotonInfo.root")

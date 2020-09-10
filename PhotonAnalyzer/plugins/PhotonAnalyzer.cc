@@ -139,8 +139,8 @@ PhotonAnalyzer::PhotonAnalyzer(const edm::ParameterSet& iConfig)
 
    fTree->Branch("genPhoton1", &fGenPhoton1, "pt/D:eta:phi:E");
    fTree->Branch("genPhoton2", &fGenPhoton2, "pt/D:eta:phi:E");
-   fTree->Branch("Photon1", &fPhoton1, "pt/D:eta:phi:E");
-   fTree->Branch("Photon2", &fPhoton2, "pt/D:eta:phi:E");
+   fTree->Branch("Photon1", &fPhoton1, "pt/D:eta:phi:E:isPassLoose/0:isPassMedium:isPassTight");
+   fTree->Branch("Photon2", &fPhoton2, "pt/D:eta:phi:E:isPassLoose/0:isPassMedium:isPassTight");
 
    genParticlesToken_   = consumes<std::vector<reco::GenParticle>>(iConfig.getParameter<edm::InputTag>("genparticles"));
    photonsMiniAODToken_ = consumes<edm::View<pat::Photon> >     (iConfig.getParameter<edm::InputTag>("photonsMiniAOD"));
