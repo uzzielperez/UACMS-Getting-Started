@@ -4,7 +4,7 @@ process = cms.Process("Demo")
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(10) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(5000) )
 
 process.source = cms.Source("PoolSource",
     # replace 'myfile.root' with the source file you want to use
@@ -22,8 +22,10 @@ setupEgammaPostRecoSeq(process,
                        'RecoEgamma.PhotonIdentification.Identification.cutBasedPhotonID_Fall17_94X_V2_cff']
                        )
 
-globalTag = '102X_upgrade2018_realistic_v12'
-process.GlobalTag.globaltag = globalTag
+process.load('Configuration.StandardSequences.GeometryRecoDB_cff')
+process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff")
+from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
+process.GlobalTag = GlobalTag(process.GlobalTag, '102X_upgrade2018_realistic_v18')
 
 process.TFileService = cms.Service("TFileService",
                 fileName = cms.string("DemoDiPhotonInfo.root")
