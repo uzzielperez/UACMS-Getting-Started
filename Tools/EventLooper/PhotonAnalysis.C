@@ -43,6 +43,7 @@ void PhotonAnalysis::Loop()
 
    genPho1Pt->Sumw2();
    patPho1Pt->Sumw2();
+   patPho1PtLoose->Sumw2();
 
    Long64_t nbytes = 0, nb = 0;
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
@@ -50,14 +51,18 @@ void PhotonAnalysis::Loop()
       if (ientry < 0) break;
       nb = fChain->GetEntry(jentry);   nbytes += nb;
       // if (Cut(ientry) < 0) continue;
+      if (jentry%100==0) std::cout << "Processing jentry: " << jentry << std::endl;
 
       genPho1Pt->Fill(genPhoton1_pt);
       patPho1Pt->Fill(Photon1_pt);
 
       // Selections
-      
-
-
-
+      if (Photon1_isPassLoose) patPho1PtLoose->Fill(Photon1_pt);
    }
+
+   TFile file_out("Kinematics.root", "RECREATE");
+   genPho1Pt->Write();
+   patPho1Pt->Write();
+   patPho1PtLoose->Write();
+
 }

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Wed Sep  9 16:40:16 2020 by ROOT version 6.12/07
+// Thu Sep 10 08:32:58 2020 by ROOT version 6.12/07
 // from TChain demo/fTree/
 //////////////////////////////////////////////////////////
 
@@ -33,10 +33,16 @@ public :
    Double_t        Photon1_eta;
    Double_t        Photon1_phi;
    Double_t        Photon1_E;
+   Char_t          Photon1_isPassLoose;
+   Char_t          Photon1_isPassMedium;
+   Char_t          Photon1_isPassTight;
    Double_t        Photon2_pt;
    Double_t        Photon2_eta;
    Double_t        Photon2_phi;
    Double_t        Photon2_E;
+   Char_t          Photon2_isPassLoose;
+   Char_t          Photon2_isPassMedium;
+   Char_t          Photon2_isPassTight;
 
    // List of branches
    TBranch        *b_genPhoton1;   //!
@@ -78,7 +84,7 @@ PhotonAnalysis::PhotonAnalysis(TTree *tree) : fChain(0)
       // The following code should be used if you want this class to access a chain
       // of trees.
       TChain * chain = new TChain("demo/fTree","");
-      chain->Add("../../PhotonAnalyzer/DemoDiPhotonInfo.root/demo/fTree");
+      chain->Add("../../DemoDiPhotonInfo.root/demo/fTree");
       tree = chain;
 #endif // SINGLE_TREE
 
