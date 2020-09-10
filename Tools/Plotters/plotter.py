@@ -58,6 +58,7 @@ c.SaveAs("plots/GenVsPatPho1pt.pdf")
 cLoose = TCanvas("cLoose", "canvasLoose", 500, 500)
 
 hpatpho1ptLoose = createHist(f, kBlack, "patPho1PtLoose")
+hRatio = createRatio(hpatpho1pt, hpatpho1ptLoose)
 
 hpatpho1pt.SetLineColor(kOrange+8)
 hpatpho1pt.SetMarkerStyle(1)
@@ -81,3 +82,22 @@ l.Draw()
 
 cLoose.Draw()
 cLoose.SaveAs("plots/LoosePhoEff.pdf")
+
+# pad1.Draw()
+
+# Ratio
+
+# pad1 = TPad("pad1", "pad1", 0, 0.3, 1, 1.0)
+# pad2 = TPad("pad2", "pad2", 0, 0.05, 1, 0.3)
+# pad1.cd()
+# pad1.SetBottomMargin(0)
+# pad2.cd()
+# pad2.SetTopMargin(0)
+# pad2.SetBottomMargin(0.2)
+# pad2.SetGridy()
+
+hRatio.Draw("same")
+
+# pad2.Draw()
+
+# Task: Make Ratio plot with python script
