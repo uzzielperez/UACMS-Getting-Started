@@ -5,6 +5,7 @@ from ROOT import *
 
 # Suppress canvas from popping up. Speeds up plots produciton
 gROOT.SetBatch()
+gStyle.SetOptStat(0)
 
 infile = "../EventLooper/Kinematics.root"
 
@@ -33,9 +34,19 @@ c = TCanvas("c", "canvas", 500, 500)
 hgenpho1pt = createHist(f, kBlack, "genPho1Pt")
 hpatpho1pt = createHist(f, kRed, "patPho1Pt")
 
+hgenpho1pt.Draw("hist")
+hpatpho1pt.Draw("same, hist")
 
-hgenpho1pt.Draw()
-hpatpho1pt.Draw("same")
+leg = TLegend(0.60, 0.75, 1.0, 0.85)
+leg.SetBorderSize(0)
+leg.SetFillColor(0)
+leg.SetFillStyle(0)
+leg.SetTextFont(42)
+leg.SetTextSize(0.035)
+leg.AddEntry(hgenpho1pt, "genPho1", "l")
+leg.AddEntry(hpatpho1pt, "patPho1", "l")
+leg.Draw()
+
 
 c.Draw()
 c.SaveAs("plots/GenVsPatPho1pt.pdf")
