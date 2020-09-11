@@ -74,6 +74,12 @@ vi python/ConfFile_cfg.py
 cmsRun python/ConfFile_cfg.py
 ```
 
+Note: For some odd reason the ConfFile_cfg.py disappeared. So you can copy a basic one by doing this:
+```
+cd python
+wget https://raw.githubusercontent.com/uzzielperez/UACMS-Getting-Started/Basic1/PhotonAnalyzer/python/ConfFile_cfg.py
+```
+
 Notice that it show an error with an exception `MissingParameter: The required parameter 'tracks' was not specified.`. We're not going to deal with tracks first so open the `plugins/PhotonAnalyzer.cc` and comment out L60, L75-76, L103-110. They've sort of built them in with the framework with the latest versions of mkedanlzr. We also just want to run with just 10 events so replace -1 with 10 in `process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1))`. Now, compile and try running again.
 
 ```python
