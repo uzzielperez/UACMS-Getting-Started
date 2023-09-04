@@ -11,3 +11,6 @@ Tutorials on getting started with CMS Analysis within the UA group
 
 * https://exo-mc-and-i.gitbook.io/exo-mc-and-interpretation/how-to-sample-production-private
 
+# EOS at LPC 
+
+* https://uscms.org/uscms_at_work/computing/LPC/usingEOSAtLPC.shtml
