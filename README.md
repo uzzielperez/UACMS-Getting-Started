@@ -14,3 +14,4 @@ Tutorials on getting started with CMS Analysis within the UA group
 # EOS at LPC 
 
 * https://uscms.org/uscms_at_work/computing/LPC/usingEOSAtLPC.shtml
+* https://uscms.org/uscms_at_work/computing/LPC/usingEOSAtLPC.shtml#eosQuotaIncrease
