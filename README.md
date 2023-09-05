@@ -15,3 +15,6 @@ Tutorials on getting started with CMS Analysis within the UA group
 
 * https://uscms.org/uscms_at_work/computing/LPC/usingEOSAtLPC.shtml
 * https://uscms.org/uscms_at_work/computing/LPC/usingEOSAtLPC.shtml#eosQuotaIncrease
+
+# CMS Analysis Journey
+* https://cms.cern/content/publishing-analysis
