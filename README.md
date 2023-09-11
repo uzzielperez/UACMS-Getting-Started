@@ -19,6 +19,10 @@ Tutorials on getting started with CMS Analysis within the UA group
 # CMS EOS and FNAL EOS 
 
 * https://uscms.org/uscms_at_work/computing/LPC/additionalEOSatLPC.shtml
+* Example of command to ls 
+```
+eos root://cmseos.fnal.gov ls /store/user/cuperez
+```
 * Example of copying a directory from FNAL EOS to CMS EOS (lxplus)
 ```
   xrdcp root://cmseos.fnal.gov//store/user/lpcml/cuperez/diphotonClosureTest root://eosuser.cern.ch//eos/cms/store/group/phys_exotica/diphoton/fullRun2/uzzie
