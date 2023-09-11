@@ -26,6 +26,8 @@ eos root://cmseos.fnal.gov ls /store/user/cuperez
 * Example of copying a directory from FNAL EOS to CMS EOS (lxplus)
 ```
   xrdcp root://cmseos.fnal.gov//store/user/lpcml/cuperez/diphotonClosureTest root://eosuser.cern.ch//eos/cms/store/group/phys_exotica/diphoton/fullRun2/uzzie
+  xrdcp -r root://cmseos.fnal.gov//store/user/cuperez/GluGluSpin0ToGammaGamma_W_0p014_M_750_TuneCP2_UL/RunIISummer20UL17_GEN root://eosuser.cern.ch//eos/cms/store/group/phys_exotica/diphoton/fullRun2/uzzie
+
 ```
 
 # CMS Analysis Journey
