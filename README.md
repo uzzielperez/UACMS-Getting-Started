@@ -30,5 +30,11 @@ eos root://cmseos.fnal.gov ls /store/user/cuperez
 
 ```
 
+## CMSLPC GPUs
+
+https://uscms.org/uscms_at_work/computing/setup/gpu.shtml
+
 # CMS Analysis Journey
 * https://cms.cern/content/publishing-analysis
+
+
