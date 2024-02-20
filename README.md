@@ -30,10 +30,10 @@ eos root://cmseos.fnal.gov ls /store/user/cuperez
 
 ```
 
-## CMSLPC GPUs
+## CERN GPUs
 
-https://uscms.org/uscms_at_work/computing/setup/gpu.shtml
-https://clouddocs.web.cern.ch/gpu/index.html
+* CMSLPC - https://uscms.org/uscms_at_work/computing/setup/gpu.shtml
+* LXPLUS - https://clouddocs.web.cern.ch/gpu/index.html
 
 # CMS Analysis Journey
 * https://cms.cern/content/publishing-analysis
