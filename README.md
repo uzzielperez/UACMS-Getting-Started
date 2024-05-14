@@ -29,6 +29,13 @@ eos root://cmseos.fnal.gov ls /store/user/cuperez
   xrdcp -r root://cmseos.fnal.gov//store/user/cuperez/GluGluSpin0ToGammaGamma_W_0p014_M_750_TuneCP2_UL/RunIISummer20UL17_GEN root://eosuser.cern.ch//eos/cms/store/group/phys_exotica/diphoton/fullRun2/uzzie
 
 ```
+## Conda LPC 
+
+```
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $HOME/nobackup/miniconda3.sh
+bash $HOME/nobackup/miniconda3.sh -b -f -u -p $HOME/nobackup/miniconda3
+source $HOME/nobackup/miniconda3/etc/profile.d/conda.sh
+```
 
 ## CERN GPUs
 
