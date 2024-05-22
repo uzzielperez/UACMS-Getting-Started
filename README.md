@@ -42,6 +42,13 @@ source $HOME/nobackup/miniconda3/etc/profile.d/conda.sh
 * CMSLPC - https://uscms.org/uscms_at_work/computing/setup/gpu.shtml
 * LXPLUS - https://clouddocs.web.cern.ch/gpu/index.html
 
+```
+cd /uscms/home/<username>/nobackup/diphotonPhD/CMSSW_10_2_26/src # Edit towards dir
+source $HOME/nobackup/miniconda3/etc/profile.d/conda.sh
+jupyter notebook --no-browser --port=4867 --ip 0.0.0.0
+```
+
+
 # CMS Analysis Journey
 * https://cms.cern/content/publishing-analysis
 
