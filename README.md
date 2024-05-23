@@ -47,7 +47,7 @@ source $HOME/nobackup/miniconda3/etc/profile.d/conda.sh
 ssh -L localhost:4867:localhost:4867 <username>@cmslpcgpu1.fnal.gov # gpu1 2 or 3, for no gpu use @<username>@cmslpc-el9.fnal.gov as of May 2024
 cd /uscms/home/<username>/nobackup/projects # Edit towards dir
 source $HOME/nobackup/miniconda3/etc/profile.d/conda.sh
-conda activate pyt_root_env
+conda activate pyt_root
 jupyter notebook --no-browser --port=4867 --ip 0.0.0.0
 ```
 
