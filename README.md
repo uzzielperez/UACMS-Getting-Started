@@ -51,6 +51,13 @@ conda activate pyt_root
 jupyter notebook --no-browser --port=4867 --ip 0.0.0.0
 ```
 
+### Conda Environment 
+```
+conda env create --file pyt_root_env.yml
+conda env update --name your_environment_name --file environment.yml # To update
+```
+
+
 
 # CMS Analysis Journey
 * https://cms.cern/content/publishing-analysis
