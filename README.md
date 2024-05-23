@@ -45,8 +45,9 @@ source $HOME/nobackup/miniconda3/etc/profile.d/conda.sh
 ```
 # To log-in to the GPUs to set up port forwarding to play with jupyter notebook
 ssh -L localhost:4867:localhost:4867 <cuperez>@cmslpcgpu1.fnal.gov # gpu1 2 or 3, for no gpu use @<username>@cmslpc-el9.fnal.gov as of May 2024
-cd /uscms/home/<username>/nobackup/diphotonPhD/CMSSW_10_2_26/src # Edit towards dir
+cd /uscms/home/<username>/nobackup/projects # Edit towards dir
 source $HOME/nobackup/miniconda3/etc/profile.d/conda.sh
+conda activate pyt_env_root
 jupyter notebook --no-browser --port=4867 --ip 0.0.0.0
 ```
 
