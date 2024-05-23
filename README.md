@@ -56,7 +56,8 @@ jupyter notebook --no-browser --port=4867 --ip 0.0.0.0
 conda env create --file pyt_root_env.yml
 conda env update --name your_environment_name --file environment.yml # To update
 #or do something like
-conda install pytorch torchvision torchaudio cudatoolkit=11.7 -c pytorch
+conda install cudatoolkit=11.3
+pip install torch==1.10.1+cu113 torchvision==0.11.2+cu113 torchaudio==0.10.1+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html # in case conda doesn't have the specific versions available like pip does
 ```
 
 
