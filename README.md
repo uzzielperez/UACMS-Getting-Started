@@ -55,6 +55,8 @@ jupyter notebook --no-browser --port=4867 --ip 0.0.0.0
 ```
 conda env create --file pyt_root_env.yml
 conda env update --name your_environment_name --file environment.yml # To update
+#or do something like
+conda install pytorch torchvision torchaudio cudatoolkit=11.7 -c pytorch
 ```
 
 
